@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     fetch("/api/products")
@@ -13,6 +14,10 @@ export default function Home() {
       .catch((err) => console.error("Error fetching products:", err))
       .finally(() => setLoading(false));
   }, []);
+
+  const handleSearch = () => {
+    alert('Searching');
+    }
 
   return (
     <main className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
@@ -24,6 +29,10 @@ export default function Home() {
           <p className="mt-2 text-zinc-600 dark:text-zinc-400">
             Browse our full collection
           </p>
+          <input onChange={(e) => setQuery(e.target.value)} value={query} type="text" placeholder="Search products..." className="mt-2 w-full rounded-md border border-zinc-300 bg-white px-4 py-2 text-sm text-zinc-900 shadow-sm focus:border-zinc-500 focus:ring-2 focus:ring-zinc-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50" />
+          <button className="rounded-md bg-zinc-900 px-4 py-2 my-4 text-sm font-semibold text-white shadow-sm transition hover:bg-zinc-800 dark:bg-zinc-700 dark:hover:bg-zinc-600 cursor-pointer" onClick={handleSearch}>
+            Search
+          </button>
         </header>
 
         {loading ? (
@@ -58,7 +67,7 @@ export default function Home() {
                 key={product._id}
                 className="group flex flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900"
               >
-                <div className="relative aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-800">
+                <div className="relative aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-800 cursor-pointer">
                   <img
                     src={product.image}
                     alt={product.title}
