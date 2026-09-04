@@ -1,61 +1,43 @@
-# mongo-ecom
+# AI-Powered E-Commerce Website
 
-A full-stack e-commerce product catalog built with **Next.js** and **MongoDB**. Products are stored in MongoDB via Mongoose and displayed on a responsive storefront using React and Tailwind CSS.
+A modern AI-powered e-commerce web application designed to provide users with a seamless and personalized online shopping experience. The project combines modern web development technologies with AI capabilities and MongoDB to manage products and application data.
 
 ## Features
 
-- **Product catalog** — Responsive grid of product cards with image, title, description, price, and category
-- **REST API** — Fetch all products from a Next.js Route Handler
-- **Database seeding** — One-click endpoint to populate the database with sample products
-- **Loading & empty states** — Skeleton placeholders while fetching and a friendly message when no products exist
-- **Dark mode support** — UI adapts to the user's system color scheme
+- Modern e-commerce shopping experience
+- AI-powered functionality and recommendations
+- Product browsing and discovery
+- MongoDB database integration
+- User-focused shopping experience
+- Responsive and modern user interface
+- Dynamic product management
 
-## Tech Stack
+## Technologies Used
 
-| Layer      | Technology                          |
-| ---------- | ----------------------------------- |
-| Framework  | [Next.js 16](https://nextjs.org) (App Router) |
-| Frontend   | React 19, Tailwind CSS 4            |
-| Database   | [MongoDB](https://www.mongodb.com)  |
-| ODM        | [Mongoose](https://mongoosejs.com)  |
-| Language   | JavaScript                          |
+| Area | Technology |
+| --- | --- |
+| Frontend | Next.js, React, Tailwind CSS |
+| Backend | Next.js API Routes |
+| Database | MongoDB (Mongoose) |
+| AI | OpenAI API |
+| Authentication | NextAuth.js |
+| Development Environment | VS Code |
+| Version Control | Git & GitHub |
 
-## Project Structure
+## Project Goal
 
-```
-mongo-ecom/
-├── app/
-│   ├── api/
-│   │   ├── products/route.js   # GET /api/products
-│   │   └── seed/route.js       # GET /api/seed
-│   ├── globals.css             # Tailwind imports & theme
-│   ├── layout.js               # Root layout
-│   └── page.js                 # Home page — product grid
-├── lib/
-│   └── db.js                   # MongoDB connection helper
-├── models/
-│   └── Product.js              # Product Mongoose schema
-└── public/                     # Static assets
-```
+The goal of this project is to build a full-stack e-commerce platform that demonstrates how modern web technologies, databases, and AI can be combined to create a more intelligent and personalized shopping experience.
 
-## Product Schema
+## Project Status
 
-Each product document contains:
-
-| Field         | Type   | Description              |
-| ------------- | ------ | ------------------------ |
-| `title`       | String | Product name             |
-| `description` | String | Short product description|
-| `price`       | Number | Price in USD             |
-| `category`    | String | e.g. Electronics, Apparel|
-| `image`       | String | Image URL                |
-
-## Prerequisites
-
-- [Node.js](https://nodejs.org) 18+
-- A MongoDB database — local instance or [MongoDB Atlas](https://www.mongodb.com/atlas) cluster
+Currently under development. New features and improvements will be added as the project progresses.
 
 ## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- A MongoDB database (local instance or [MongoDB Atlas](https://www.mongodb.com/atlas))
 
 ### 1. Clone and install
 
@@ -71,9 +53,10 @@ Create a `.env.local` file in the project root:
 
 ```env
 MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<dbname>?retryWrites=true&w=majority
+OPENAI_API_KEY=your_openai_api_key
 ```
 
-Replace the connection string with your own MongoDB URI.
+Replace the values with your own MongoDB URI and OpenAI API key.
 
 ### 3. Run the development server
 
@@ -85,7 +68,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### 4. Seed the database
 
-On first run the product list will be empty. Visit the seed endpoint to load 41 sample products:
+On first run the product list may be empty. Visit the seed endpoint to load sample products:
 
 ```
 http://localhost:3000/api/seed
@@ -101,56 +84,29 @@ Refresh the home page to view the catalog.
 
 > **Note:** The seed route clears all existing products before inserting samples. Use it only in development.
 
-## API Reference
+## Current Project Structure
 
-### `GET /api/products`
-
-Returns all products from the database.
-
-**Response:** `200 OK` — JSON array of product objects.
-
-```json
-[
-  {
-    "_id": "...",
-    "title": "Wireless Headphones",
-    "description": "High-quality wireless headphones with noise cancellation.",
-    "price": 129.99,
-    "category": "Electronics",
-    "image": "https://picsum.photos/500/300"
-  }
-]
 ```
-
-### `GET /api/seed`
-
-Deletes all existing products and inserts 41 sample products across categories such as Electronics, Apparel, Footwear, Accessories, Sports, and Outdoor.
-
-**Response:** `200 OK`
-
-```json
-{ "message": "Database seeded successfully!" }
+mongo-ecom/
+├── app/
+│   ├── api/
+│   │   ├── products/route.js   # GET /api/products
+│   │   └── seed/route.js       # GET /api/seed
+│   ├── globals.css
+│   ├── layout.js
+│   └── page.js                 # Product catalog
+├── lib/
+│   └── db.js                   # MongoDB connection
+├── models/
+│   └── Product.js              # Product schema
+└── public/
 ```
 
 ## Available Scripts
 
-| Command         | Description                    |
-| --------------- | ------------------------------ |
-| `npm run dev`   | Start the development server   |
-| `npm run build` | Create a production build      |
-| `npm run start` | Start the production server    |
-| `npm run lint`  | Run ESLint                     |
-
-## Deployment
-
-This app can be deployed to [Vercel](https://vercel.com) or any platform that supports Next.js.
-
-1. Push your code to a Git repository.
-2. Set the `MONGO_URI` environment variable in your hosting provider's dashboard.
-3. Deploy — Vercel will run `next build` automatically.
-
-Ensure your MongoDB Atlas cluster allows connections from your deployment environment (e.g. allow access from anywhere `0.0.0.0/0` or add Vercel's IP ranges).
-
-## License
-
-Private project.
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the development server |
+| `npm run build` | Create a production build |
+| `npm run start` | Start the production server |
+| `npm run lint` | Run ESLint |
